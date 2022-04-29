@@ -1,12 +1,18 @@
 package grafos_algoritimos;
+
+import java.util.LinkedList;
+
 public class Vertice {
     
+    private int id;
+
     private String cor;
-    private Integer distancia;
+    private Double distancia;
+    private LinkedList<Vertice> adjacentes;
     private Vertice anterior;
 
     public Vertice(){
-        
+        id++;
     }
 
     public String getCor(){
@@ -17,11 +23,11 @@ public class Vertice {
         this.cor = cor;
     }
 
-    public Integer getDistancia() {
+    public Double getDistancia() {
         return this.distancia;
     }
 
-    public void setDistancia(Integer distancia){
+    public void setDistancia(Double distancia){
         this.distancia = distancia;
     }
 
@@ -32,4 +38,13 @@ public class Vertice {
     public void setAnterior(Vertice anterior){
         this.anterior = anterior;
     }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public LinkedList<Vertice> getAdjacentes() {
+        return adjacentes;
+    }
+
 }

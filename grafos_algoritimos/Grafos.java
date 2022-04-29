@@ -1,6 +1,7 @@
 package grafos_algoritimos;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Grafos {
     public static void main(String[] args) {
@@ -8,36 +9,35 @@ public class Grafos {
     }
 
     public static void bfs(LinkedList<Vertice> grafos, Vertice vertice){
-        LinkedList<Vertice> fila = new LinkedList<>();
-        int tamGrafo = grafos.size();
 
-        for(int i = 0; i < tamGrafo; i++){
-            grafos.get(i).setCor("BRANCO");
-            grafos.get(i).setDistancia(null);
-            grafos.get(i).setAnterior(null);
-        }
-        primeiroVertice.setCor("CINZA");
-        primeiroVertice.setDistancia(0);
-
-        fila.add(primeiroVertice);
-
-        while (fila.isEmpty()) {
-            
-        }
+        Queue<Vertice> fila = new LinkedList<Vertice>();
         
+        //int idVertice = vertice.getId();
 
-        
-        
-        /*
-        for(int i = 0; i < tamGrafo; i++){
-            
+        for (Vertice verticeAtual : grafos) {
+            verticeAtual.setCor("BRANCO");
+            verticeAtual.setDistancia(Double.POSITIVE_INFINITY);
+            verticeAtual.setAnterior(null);
         }
 
-        for (Integer integer : grafos) {
-            
-        }
 
-        */
+        vertice.setCor("CINZA");
+        
+        fila.add(vertice);
+
+        while (!fila.isEmpty()) {
+            Vertice verticeAtual;
+            verticeAtual = fila.remove();
+            for (Vertice adjacente : verticeAtual.getAdjacentes()) {
+                if (adjacente.getCor().equals("BRANCO")){
+                    adjacente.setCor("CINZA");
+                    adjacente.setDistancia(verticeAtual.getDistancia() + 1);
+                    adjacente.setAnterior(verticeAtual.getAnterior());
+                    fila.add(adjacente);
+                }
+                verticeAtual.setCor("PRETO");
+            }
+        }
 
     }
 
