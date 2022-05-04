@@ -3,13 +3,14 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-        //LinkedList<Vertice> grafo = new LinkedList<Vertice>();
+
         Grafo grafo = new Grafo();
 
         Vertice vertice1 = new Vertice();
         Vertice vertice2 = new Vertice();
         Vertice vertice3 = new Vertice();
         Vertice vertice4 = new Vertice();
+        Vertice vertice5 = new Vertice();
 
         vertice1.addAresta(vertice2);
         vertice2.addAresta(vertice3);
@@ -20,16 +21,17 @@ public class Main {
         grafo.addVertice(vertice2);
         grafo.addVertice(vertice3);
         grafo.addVertice(vertice4);
+        grafo.addVertice(vertice5);
 
         bfs(grafo, vertice1);
+
+        imprimirMenorCaminho(vertice1, vertice5);
         
     }
 
     public static void bfs(Grafo grafo, Vertice vertice){
 
         Queue<Vertice> fila = new LinkedList<Vertice>();
-        
-        //int idVertice = vertice.getId();
 
         for (Vertice verticeAtual : grafo.getVertices()) {
             verticeAtual.setCor("BRANCO");
@@ -58,23 +60,20 @@ public class Main {
 
     }
 
-    /*
 
-    BFS (grafo G, vértice s)
-        para cada vértice u
-            cor[u] = BRANCO; d[u] = ; ante[u] = NIL;
-        cor[s] = CINZA; d[s] = 0;
-        Enfileira(Q, s);
 
-        While ( ! EstahVazia(Q) )
-            u = Desenfileira(Q);
-            para cada v na lista Adj[u]
-                if (cor[v] == BRANCO)
-                cor[v] = CINZA; d[v] = d[u]+1; ante[v] = u;
-                Enfileira (v, Q);
-
-            cor[u] = PRETO;
-
-    */
+    public static void imprimirMenorCaminho(Vertice verticeA, Vertice verticeB) {
+        if(verticeA.equals(verticeB) ) {
+            System.out.print(verticeB);
+        } else {
+            if(verticeB.getAnterior() == null){
+                System.out.println("não ha caminho! ");
+            }else{
+                imprimirMenorCaminho(verticeA, verticeB.getAnterior());
+                System.out.print(" ---> ");
+                System.out.print(verticeB);
+            }
+        }
+    }
     
 }

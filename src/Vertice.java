@@ -11,12 +11,12 @@ public class Vertice {
     private Vertice anterior;
     //private LinkedList<Vertice> adjacentes;
     private LinkedList<Aresta> arestas;
-    private LinkedList<String> pontos;
+    private LinkedList<String> locais;
 
     public Vertice(){
         id = sequence++;
         arestas = new LinkedList<>();
-        pontos = new LinkedList<>();
+        locais = new LinkedList<>();
     }
 
     public String getCor(){
@@ -74,6 +74,11 @@ public class Vertice {
         }
         Vertice anotherVertice = (Vertice) object;
         return this.id == anotherVertice.id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%d)", this.id);
     }
 
     // comentario para commit a
