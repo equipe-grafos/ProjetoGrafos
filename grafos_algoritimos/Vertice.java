@@ -7,9 +7,10 @@ public class Vertice {
     private int id;
 
     private String cor;
-    private Double distancia;
-    private LinkedList<Vertice> adjacentes;
+    private double distancia;
     private Vertice anterior;
+    private LinkedList<Vertice> adjacentes;
+    private LinkedList<String> pontos;
 
     public Vertice(){
         id++;
@@ -23,11 +24,11 @@ public class Vertice {
         this.cor = cor;
     }
 
-    public Double getDistancia() {
+    public double getDistancia() {
         return this.distancia;
     }
 
-    public void setDistancia(Double distancia){
+    public void setDistancia(double distancia){
         this.distancia = distancia;
     }
 
@@ -46,5 +47,21 @@ public class Vertice {
     public LinkedList<Vertice> getAdjacentes() {
         return adjacentes;
     }
+
+    public void addAdjacente(Vertice adjacente){
+        this.adjacentes.add(adjacente);
+        adjacente.addAdjacente(this);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if(!(object instanceof Vertice)) {
+            return false;
+        }
+        Vertice anotherVertice = (Vertice) object;
+        return this.id == anotherVertice.id;
+    }
+
+    // comentario para commit 
 
 }
