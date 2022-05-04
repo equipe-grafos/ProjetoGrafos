@@ -1,5 +1,3 @@
-package grafos_algoritimos;
-
 public class Aresta {
 
     private Vertice vertice;
@@ -11,7 +9,5 @@ public class Aresta {
     public Vertice getVertice() {
         return vertice;
     }
-
-
 
 }

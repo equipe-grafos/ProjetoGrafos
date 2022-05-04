@@ -1,5 +1,3 @@
-package grafos_algoritimos;
-
 import java.util.LinkedList;
 import java.util.Queue;
 

@@ -1,5 +1,3 @@
-package grafos_algoritimos;
-
 import java.util.LinkedList;
 
 public class Vertice {
@@ -78,6 +76,6 @@ public class Vertice {
         return this.id == anotherVertice.id;
     }
 
-    // comentario para commit 
+    // comentario para commit a
 
 }
