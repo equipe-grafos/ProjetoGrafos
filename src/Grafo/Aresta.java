@@ -1,3 +1,4 @@
+package Grafo;
 public class Aresta {
 
     private Vertice vertice;
