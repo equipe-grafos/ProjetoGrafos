@@ -1,15 +1,14 @@
 package Grafo;
 import java.util.LinkedList;
 
-public class Vertice implements Comparable {
+public class Vertice {
 
     private String id;
 
     private String cor;
     private double distancia;
     private Vertice anterior;
-    private double custo;
-    private Vertice verticeAnterior;
+    private double custoLocal;
     private LinkedList<Aresta> arestas;
     private LinkedList<String> locais;
 
@@ -50,19 +49,26 @@ public class Vertice implements Comparable {
     public double getCusto(Vertice vertice) {
         for (Aresta aresta : this.arestas) {
             if(aresta.getVertice().equals(vertice)) {
-                this.verticeAnterior = aresta.getVertice();
                 return aresta.getCusto();
             }
         }
         return 0;
     }
 
-    public void setCusto(double custo) {
+    public void setCusto(Vertice vertice ,double custo) {
         for (Aresta aresta : this.arestas) {
-            if(aresta.getVertice().equals(verticeAnterior)) {
+            if(aresta.getVertice().equals(vertice)) {
                 aresta.setCusto(custo);
             }
         }
+    }
+
+    public double getCustoLocal() {
+        return this.custoLocal;
+    }
+
+    public void setCustoLocal(double custoLocal) {
+        this.custoLocal = custoLocal;
     }
 
     public LinkedList<String> getLocais() {
@@ -103,22 +109,8 @@ public class Vertice implements Comparable {
 
     @Override
     public String toString() {
-        return String.format("[%s : %.2f]", this.id, this.custo);
+        return String.format("[%s : %.2f]", this.id, this.custoLocal);
     }
 
-    @Override
-    public int compareTo(Object object) {
-
-        Vertice vertice = (Vertice) object;
-
-        if(this.custo == vertice.custo) {
-            return 0;
-        } else if(this.custo > vertice.custo) {
-            return 1;
-        } else{
-            return -1;
-        }
-        
-    }
 
 }

@@ -1,7 +1,6 @@
 package Algoritmos;
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 import Grafo.Grafo;
@@ -31,29 +30,54 @@ public class AlgoritmoDijkstra implements Algoritmo {
     }
 
     public static void inicializa(Grafo grafo, Vertice verticeAtual) {
-        for (Vertice proximoVertice : verticeAtual.getAdjacentes()) {
-            proximoVertice.setCusto(Double.POSITIVE_INFINITY);
+        for (Vertice proximoVertice : grafo.getVertices()) {
+            proximoVertice.setCustoLocal(Double.POSITIVE_INFINITY);
             proximoVertice.setAnterior(null);
         }
-        verticeAtual.setCusto(0);
+        verticeAtual.setCustoLocal(0);
     }
 
     public static void relaxar(Vertice verticeA, Vertice verticeB, double peso) {
-        if((verticeA.getCusto(verticeB) + peso) < verticeB.getCusto(verticeB)){
-            double novoCusto = verticeA.getCusto(verticeB) + peso;
-            verticeB.setCusto(novoCusto);
+        if((verticeA.getCustoLocal() + peso) < verticeB.getCustoLocal()){
+            double novoCusto = verticeA.getCustoLocal() + peso;
+            verticeB.setCustoLocal(novoCusto);
             verticeB.setAnterior(verticeA);
         }
     }
 
-    public static PriorityQueue<Vertice> addVertices(Grafo grafo) {
+    public static Queue<Vertice> addVertices(Grafo grafo) {
+       /*  Queue<Vertice> queue = new LinkedList<>();
+        for (Vertice vertice : grafo.getVertices()) {
+            queue.add(vertice);
+        }
+        return queue;  */    
 
-        PriorityQueue<Vertice> priorityQueue = new PriorityQueue<>();
-
-        priorityQueue.addAll(grafo.getVertices());
-
-        return priorityQueue;
+        LinkedList<Vertice> fila = new LinkedList<>();
         
+        for (Vertice vertice : grafo.getVertices()) {
+            fila.add(vertice);
+        }
+
+        LinkedList<Vertice> queue = new LinkedList<>();
+
+        while(!fila.isEmpty()) {
+
+            Vertice verticeAtual = fila.removeFirst();
+        
+            if(!verticeAtual.getAdjacentes().isEmpty()) {
+                queue.add(verticeAtual);
+                for (Vertice vertice : verticeAtual.getAdjacentes()) {
+                    fila.remove(vertice);
+                    queue.add(vertice);
+                }
+            }else {
+                queue.addLast(verticeAtual);
+            }
+
+        }
+
+        return queue;
+
     }
     
 }
