@@ -23,6 +23,7 @@ public class AlgoritmoBFS implements Algoritmo {
                     adjacente.setCor("CINZA");
                     adjacente.setDistancia(verticeAtual.getDistancia() + 1);
                     adjacente.setAnterior(verticeAtual);
+                    adjacente.setCustoAresta(verticeAtual.getCusto(adjacente));
                     fila.add(adjacente);
                 }
             }
@@ -36,7 +37,9 @@ public class AlgoritmoBFS implements Algoritmo {
             verticeAtual.setCor("BRANCO");
             verticeAtual.setDistancia(Double.POSITIVE_INFINITY);
             verticeAtual.setAnterior(null);
+            verticeAtual.setCustoAresta(Double.POSITIVE_INFINITY);
         }
+        vertice.setCustoAresta(0);
     }
 
 }

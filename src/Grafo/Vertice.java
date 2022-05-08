@@ -9,6 +9,7 @@ public class Vertice {
     private double distancia;
     private Vertice anterior;
     private double custoLocal;
+    private double custoAresta;
     private LinkedList<Aresta> arestas;
     private LinkedList<String> locais;
 
@@ -63,6 +64,14 @@ public class Vertice {
         }
     }
 
+    public double getCustoAresta() {
+        return this.custoAresta;
+    }
+
+    public void setCustoAresta(double custoAresta) {
+        this.custoAresta = custoAresta;
+    }
+
     public double getCustoLocal() {
         return this.custoLocal;
     }
@@ -109,7 +118,7 @@ public class Vertice {
 
     @Override
     public String toString() {
-        return String.format("[%s : %.2f]", this.id, this.custoLocal);
+        return String.format("%s", this.id);
     }
 
 

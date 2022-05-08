@@ -11,22 +11,15 @@ public class AlgoritmoDijkstra implements Algoritmo {
     @Override
     public void buscar(Grafo grafo, Vertice vertice) {
         Queue<Vertice> lista = new LinkedList<>();
-        
         inicializa(grafo, vertice);
-
         lista = addVertices(grafo);
-
         while(!lista.isEmpty()){
-
             Vertice verticeAtual;
             verticeAtual = lista.remove();
-
             for (Vertice adjacente : verticeAtual.getAdjacentes()) {
                 relaxar(verticeAtual, adjacente, verticeAtual.getCusto(adjacente) );
             } 
-            
         }
-        
     }
 
     public static void inicializa(Grafo grafo, Vertice verticeAtual) {
@@ -41,29 +34,19 @@ public class AlgoritmoDijkstra implements Algoritmo {
         if((verticeA.getCustoLocal() + peso) < verticeB.getCustoLocal()){
             double novoCusto = verticeA.getCustoLocal() + peso;
             verticeB.setCustoLocal(novoCusto);
+            verticeB.setCustoAresta(peso);
             verticeB.setAnterior(verticeA);
         }
     }
 
-    public static Queue<Vertice> addVertices(Grafo grafo) {
-       /*  Queue<Vertice> queue = new LinkedList<>();
-        for (Vertice vertice : grafo.getVertices()) {
-            queue.add(vertice);
-        }
-        return queue;  */    
-
+    public static Queue<Vertice> addVertices(Grafo grafo) {   
         LinkedList<Vertice> fila = new LinkedList<>();
-        
+        LinkedList<Vertice> queue = new LinkedList<>();
         for (Vertice vertice : grafo.getVertices()) {
             fila.add(vertice);
         }
-
-        LinkedList<Vertice> queue = new LinkedList<>();
-
         while(!fila.isEmpty()) {
-
             Vertice verticeAtual = fila.removeFirst();
-        
             if(!verticeAtual.getAdjacentes().isEmpty()) {
                 queue.add(verticeAtual);
                 for (Vertice vertice : verticeAtual.getAdjacentes()) {
@@ -73,11 +56,8 @@ public class AlgoritmoDijkstra implements Algoritmo {
             }else {
                 queue.addLast(verticeAtual);
             }
-
         }
-
         return queue;
-
     }
     
 }

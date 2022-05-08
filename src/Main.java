@@ -35,9 +35,9 @@ public class Main {
             switch(opcao) {
                 case 1: imprimeVertices(grafo);
                     break;
-                case 2: imprimeMenorCaminhoBFS(grafo);
+                case 2: menorCaminhoBFS(grafo);
                     break;
-                case 3: imprimeMenorCaminhoDijkstra(grafo);
+                case 3: menorCaminhoDijkstra(grafo);
                     break;
                 default:
                     break;
@@ -77,32 +77,19 @@ public class Main {
 
     public static void imprimirMenorCaminho(Vertice verticeA, Vertice verticeB) {
         if(verticeA.equals(verticeB) ) {
-            System.out.print(verticeB);
+            System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoLocal());
         } else {
             if(verticeB.getAnterior() == null){
                 System.out.println("não há caminho! ");
             }else{
                 imprimirMenorCaminho(verticeA, verticeB.getAnterior());
                 System.out.print(" ---> ");
-                System.out.print(verticeB);
+                System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoAresta());
             }
         }
     }
 
-    public static double calculaCustoTotal(Vertice verticeA, Vertice verticeB) {
-        
-        if(verticeA.equals(verticeB) ) {
-            return verticeB.getCusto(verticeA);
-        } else {
-            if(verticeB.getAnterior() == null){
-                return 0;
-            }else{
-                return calculaCustoTotal(verticeA, verticeB.getAnterior()) + verticeB.getCusto(verticeA);
-            }
-        }
-    }
-
-    public static void imprimeMenorCaminhoBFS(Grafo grafo) {
+    public static void menorCaminhoBFS(Grafo grafo) {
         ler.nextLine();
         System.out.format("Nome do vertice A: ");
         String idA = ler.nextLine();
@@ -114,12 +101,12 @@ public class Main {
         algoritmo.buscar(grafo, verticeA);
         System.out.println();
         imprimirMenorCaminho(verticeA, verticeB);
-        double custoTotal = calculaCustoTotal(verticeA, verticeB);
         System.out.println();
-        System.out.println("Custo total do menor caminho: " + custoTotal);
+        double custoTotal = calculaCustoTotal(verticeA, verticeB);
+        System.out.println("Custo total = " + custoTotal);
     }
 
-    public static void imprimeMenorCaminhoDijkstra(Grafo grafo) {
+    public static void menorCaminhoDijkstra(Grafo grafo) {
         ler.nextLine();
         System.out.format("Nome do vertice A: ");
         String idA = ler.nextLine();
@@ -131,10 +118,24 @@ public class Main {
         algoritmo.buscar(grafo, verticeA);
         System.out.println();
         imprimirMenorCaminho(verticeA, verticeB);
-        double custoTotal = calculaCustoTotal(verticeA, verticeB);
         System.out.println();
-        System.out.println("Custo total do menor caminho: " + custoTotal);
+        double custoTotal = calculaCustoTotal(verticeA, verticeB);
+        System.out.println("Custo total = " + custoTotal);
     }
+
+
+    public static double calculaCustoTotal(Vertice verticeA, Vertice verticeB) {
+        if(verticeA.equals(verticeB) ) {
+            return verticeB.getCustoAresta();
+        } else {
+            if(verticeB.getAnterior() == null){
+                return Double.POSITIVE_INFINITY;
+            }else{
+                return calculaCustoTotal(verticeA, verticeB.getAnterior()) + verticeB.getCustoAresta();
+            }
+        }
+    }
+
 
     public static String[] lerArquivo(String nomeArquivo) {
         String palavra = "";
