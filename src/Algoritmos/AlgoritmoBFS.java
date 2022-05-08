@@ -7,9 +7,10 @@ import Grafo.Vertice;
 
 public class AlgoritmoBFS implements Algoritmo {
 
+    //Algoritmo Busca em Escala
+
     @Override
     public void buscar(Grafo grafo ,Vertice vertice) {
-
         Queue<Vertice> fila = new LinkedList<Vertice>();
         inicializa(grafo, vertice);
         vertice.setCor("CINZA");

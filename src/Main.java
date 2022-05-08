@@ -31,7 +31,6 @@ public class Main {
         opcao = ler.nextInt();
 
         while(opcao <= 3) {
-
             switch(opcao) {
                 case 1: imprimeVertices(grafo);
                     break;
@@ -39,54 +38,13 @@ public class Main {
                     break;
                 case 3: menorCaminhoDijkstra(grafo);
                     break;
-                default:
+                default: 
                     break;
             }
-
             menuPrincipal();
             opcao = ler.nextInt();
-
         }
-
         
-
-
-       /*  Algoritmo algoritmo = new AlgoritmoBFS();
-
-        algoritmo.buscar(grafo, vertice1);
-
-        imprimirMenorCaminho(vertice1, vertice7);
-        System.out.println(); */
-        
-    }
-
-    public static void menuPrincipal() {
-        System.out.println("==============================");
-        System.out.format("Selecione uma opção: %n"
-            + "1 - Vizualizar Grafo %n"
-            + "2 - Buscar menor caminho BFS %n"
-            + "3 - Buscar menor caminho Dijkstra %n"
-            + "Digite: ");
-    }
-
-    public static void imprimeVertices(Grafo grafo) {
-        for (Vertice verticeAtual : grafo.getVertices()) {
-            System.out.println(verticeAtual);
-        }
-    }
-
-    public static void imprimirMenorCaminho(Vertice verticeA, Vertice verticeB) {
-        if(verticeA.equals(verticeB) ) {
-            System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoLocal());
-        } else {
-            if(verticeB.getAnterior() == null){
-                System.out.println("não há caminho! ");
-            }else{
-                imprimirMenorCaminho(verticeA, verticeB.getAnterior());
-                System.out.print(" ---> ");
-                System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoAresta());
-            }
-        }
     }
 
     public static void menorCaminhoBFS(Grafo grafo) {
@@ -123,6 +81,34 @@ public class Main {
         System.out.println("Custo total = " + custoTotal);
     }
 
+    public static void menuPrincipal() {
+        System.out.println("==============================");
+        System.out.format("Selecione uma opção: %n"
+            + "1 - Vizualizar Grafo %n"
+            + "2 - Buscar menor caminho BFS %n"
+            + "3 - Buscar menor caminho Dijkstra %n"
+            + "Digite: ");
+    }
+
+    public static void imprimeVertices(Grafo grafo) {
+        for (Vertice verticeAtual : grafo.getVertices()) {
+            System.out.println(verticeAtual);
+        }
+    }
+
+    public static void imprimirMenorCaminho(Vertice verticeA, Vertice verticeB) {
+        if(verticeA.equals(verticeB) ) {
+            System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoLocal());
+        } else {
+            if(verticeB.getAnterior() == null){
+                System.out.println("não há caminho! ");
+            }else{
+                imprimirMenorCaminho(verticeA, verticeB.getAnterior());
+                System.out.print(" ---> ");
+                System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoAresta());
+            }
+        }
+    }
 
     public static double calculaCustoTotal(Vertice verticeA, Vertice verticeB) {
         if(verticeA.equals(verticeB) ) {
@@ -135,7 +121,6 @@ public class Main {
             }
         }
     }
-
 
     public static String[] lerArquivo(String nomeArquivo) {
         String palavra = "";
@@ -162,7 +147,6 @@ public class Main {
         String[] verticeA = new String[palavras.length];
         String[] verticeB = new String[palavras.length];
         String[] peso = new String[palavras.length];
-        
         for (int i = 0; i < palavras.length; i++) {
             linha[i] = String.valueOf(palavras[i]);
             verticeA[i] = linha[i].split(";")[0];
@@ -174,8 +158,6 @@ public class Main {
             Aresta novAresta = new Aresta(verticeBAtual, pesoAtual);
             verticeAAtual.addAresta(novAresta);
         }
-       
     }
-
     
 }
