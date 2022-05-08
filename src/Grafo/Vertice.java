@@ -1,26 +1,25 @@
 package Grafo;
 import java.util.LinkedList;
 
-public class Vertice {
+public class Vertice implements Comparable {
 
-    private static int sequence = 0;
-
-    private int id;
+    private String id;
 
     private String cor;
     private double distancia;
     private Vertice anterior;
     private double custo;
+    private Vertice verticeAnterior;
     private LinkedList<Aresta> arestas;
     private LinkedList<String> locais;
 
-    public Vertice() {
-        id = sequence++;
+    public Vertice(String id) {
+        this.id = id;
         arestas = new LinkedList<>();
         locais = new LinkedList<>();
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -48,12 +47,22 @@ public class Vertice {
         this.anterior = anterior;
     }
 
-    public double getCusto() {
-        return this.custo;
+    public double getCusto(Vertice vertice) {
+        for (Aresta aresta : this.arestas) {
+            if(aresta.getVertice().equals(vertice)) {
+                this.verticeAnterior = aresta.getVertice();
+                return aresta.getCusto();
+            }
+        }
+        return 0;
     }
 
     public void setCusto(double custo) {
-        this.custo = custo;
+        for (Aresta aresta : this.arestas) {
+            if(aresta.getVertice().equals(verticeAnterior)) {
+                aresta.setCusto(custo);
+            }
+        }
     }
 
     public LinkedList<String> getLocais() {
@@ -68,10 +77,10 @@ public class Vertice {
         this.locais.remove(local);
     }
 
-    public void addAresta(Vertice vertice) {
-        Aresta newAresta = new Aresta(vertice);
-        this.arestas.add(newAresta);
+    public void addAresta(Aresta aresta) {
+        this.arestas.add(aresta);
     }
+    
 
     public LinkedList<Vertice> getAdjacentes() {
         LinkedList<Vertice> adjacentes = new LinkedList<>();
@@ -94,7 +103,22 @@ public class Vertice {
 
     @Override
     public String toString() {
-        return String.format("(%d)", this.id);
+        return String.format("[%s : %.2f]", this.id, this.custo);
+    }
+
+    @Override
+    public int compareTo(Object object) {
+
+        Vertice vertice = (Vertice) object;
+
+        if(this.custo == vertice.custo) {
+            return 0;
+        } else if(this.custo > vertice.custo) {
+            return 1;
+        } else{
+            return -1;
+        }
+        
     }
 
 }

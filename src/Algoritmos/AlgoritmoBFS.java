@@ -7,6 +7,7 @@ import Grafo.Vertice;
 
 public class AlgoritmoBFS implements Algoritmo {
 
+    @Override
     public void buscar(Grafo grafo ,Vertice vertice) {
 
         Queue<Vertice> fila = new LinkedList<Vertice>();

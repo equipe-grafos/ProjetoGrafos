@@ -14,8 +14,21 @@ public class Grafo {
         return vertices;
     }
 
+    public Vertice getVerticeByID(String id) {
+        for (Vertice vertice : vertices) {
+            if(vertice.getId().equals(id)) {
+                return vertice;
+            }
+        }
+        return null;
+    }
+
     public void addVertice(Vertice vertice) {
         this.vertices.add(vertice);
+    }
+
+    public void setListaVertices(LinkedList<Vertice> vertices) {
+        this.vertices = vertices;
     }
 
     public Vertice searchElement(Vertice vertice) {
