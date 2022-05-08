@@ -82,7 +82,7 @@ public class Main {
     }
 
     public static void menuPrincipal() {
-        System.out.println("==============================");
+        System.out.println("===================================");
         System.out.format("Selecione uma opção: %n"
             + "1 - Vizualizar Grafo %n"
             + "2 - Buscar menor caminho BFS %n"
@@ -91,8 +91,14 @@ public class Main {
     }
 
     public static void imprimeVertices(Grafo grafo) {
+        System.out.format("%n %n=================================== %n");
+        System.out.format("%n Grafo Unicap %n %n %n");
         for (Vertice verticeAtual : grafo.getVertices()) {
-            System.out.println(verticeAtual);
+            System.out.format(" [%s]", verticeAtual);
+            for (Vertice adjacente : verticeAtual.getAdjacentes()) {
+                System.out.format("%n --------> [%s : %.2f] %n", adjacente, verticeAtual.getCusto(adjacente));
+            }
+            System.out.format("%n %n %n");
         }
     }
 
@@ -104,7 +110,7 @@ public class Main {
                 System.out.println("não há caminho! ");
             }else{
                 imprimirMenorCaminho(verticeA, verticeB.getAnterior());
-                System.out.print(" ---> ");
+                System.out.print(" <--> ");
                 System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoAresta());
             }
         }
