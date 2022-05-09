@@ -1,7 +1,8 @@
 package Algoritmos;
 
+import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 import Grafo.Grafo;
 import Grafo.Vertice;
@@ -10,12 +11,13 @@ public class AlgoritmoDijkstra implements Algoritmo {
 
     @Override
     public void buscar(Grafo grafo, Vertice vertice) {
-        Queue<Vertice> lista = new LinkedList<>();
+        List<Vertice> lista = new LinkedList<>();
         inicializa(grafo, vertice);
         lista = addVertices(grafo);
+        Collections.sort(lista);
         while(!lista.isEmpty()){
             Vertice verticeAtual;
-            verticeAtual = lista.remove();
+            verticeAtual = lista.remove(0);
             for (Vertice adjacente : verticeAtual.getAdjacentes()) {
                 relaxar(verticeAtual, adjacente, verticeAtual.getCusto(adjacente) );
             } 
@@ -39,25 +41,13 @@ public class AlgoritmoDijkstra implements Algoritmo {
         }
     }
 
-    public static Queue<Vertice> addVertices(Grafo grafo) {   
+    public static LinkedList<Vertice> addVertices(Grafo grafo) {   
         LinkedList<Vertice> fila = new LinkedList<>();
-        LinkedList<Vertice> queue = new LinkedList<>();
         for (Vertice vertice : grafo.getVertices()) {
             fila.add(vertice);
         }
-        while(!fila.isEmpty()) {
-            Vertice verticeAtual = fila.removeFirst();
-            if(!verticeAtual.getAdjacentes().isEmpty()) {
-                queue.add(verticeAtual);
-                for (Vertice vertice : verticeAtual.getAdjacentes()) {
-                    fila.remove(vertice);
-                    queue.add(vertice);
-                }
-            }else {
-                queue.addLast(verticeAtual);
-            }
-        }
-        return queue;
+        return fila;
     }
-    
+
+
 }
