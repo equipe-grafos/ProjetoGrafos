@@ -34,7 +34,7 @@ public class AlgoritmoDijkstra implements Algoritmo {
         if((verticeA.getCustoLocal() + peso) < verticeB.getCustoLocal()){
             double novoCusto = verticeA.getCustoLocal() + peso;
             verticeB.setCustoLocal(novoCusto);
-            verticeB.setCustoAresta(peso);
+            //verticeB.setCustoAresta(peso);
             verticeB.setAnterior(verticeA);
         }
     }
@@ -48,12 +48,14 @@ public class AlgoritmoDijkstra implements Algoritmo {
         while(!fila.isEmpty()) {
             Vertice verticeAtual = fila.removeFirst();
             if(!verticeAtual.getAdjacentes().isEmpty()) {
+                fila.remove(verticeAtual);
                 queue.add(verticeAtual);
                 for (Vertice vertice : verticeAtual.getAdjacentes()) {
                     fila.remove(vertice);
                     queue.add(vertice);
                 }
             }else {
+                fila.remove(verticeAtual);
                 queue.addLast(verticeAtual);
             }
         }

@@ -21,8 +21,8 @@ public class Main {
         
         int opcao;
         Grafo grafo = new Grafo();
-        String[] arquivoVertices = lerArquivo("vertices.txt");
-        String[] arquivoArestas = lerArquivo("arestas.txt");
+        String[] arquivoVertices = lerArquivo("VerticesUnicap.txt");
+        String[] arquivoArestas = lerArquivo("ArestasUnicap.txt");
         LinkedList<Vertice> vertices = criarVertices(arquivoVertices);
         grafo.setListaVertices(vertices);
         criarArestasAddGrafo(grafo, arquivoArestas);
@@ -111,19 +111,19 @@ public class Main {
             }else{
                 imprimirMenorCaminho(verticeA, verticeB.getAnterior());
                 System.out.print(" <--> ");
-                System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoAresta());
+                System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoLocal());
             }
         }
     }
 
     public static double calculaCustoTotal(Vertice verticeA, Vertice verticeB) {
         if(verticeA.equals(verticeB) ) {
-            return verticeB.getCustoAresta();
+            return verticeB.getCustoLocal();
         } else {
             if(verticeB.getAnterior() == null){
                 return Double.POSITIVE_INFINITY;
             }else{
-                return calculaCustoTotal(verticeA, verticeB.getAnterior()) + verticeB.getCustoAresta();
+                return calculaCustoTotal(verticeA, verticeB.getAnterior()) + verticeB.getCustoLocal();
             }
         }
     }
