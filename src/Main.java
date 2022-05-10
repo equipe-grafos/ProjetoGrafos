@@ -104,7 +104,7 @@ public class Main {
 
     public static void imprimirMenorCaminho(Vertice verticeA, Vertice verticeB) {
         if(verticeA.equals(verticeB) ) {
-            System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoLocal());
+            System.out.format("[%s : %.2f]",verticeB, verticeB.getCustoAresta());
         } else {
             if(verticeB.getAnterior() == null){
                 System.out.println("não há caminho! ");
