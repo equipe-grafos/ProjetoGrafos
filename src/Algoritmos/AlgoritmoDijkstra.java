@@ -2,7 +2,6 @@ package Algoritmos;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
 import Grafo.Grafo;
 import Grafo.Vertice;
@@ -11,13 +10,14 @@ public class AlgoritmoDijkstra implements Algoritmo {
 
     @Override
     public void buscar(Grafo grafo, Vertice vertice) {
-        List<Vertice> lista = new LinkedList<>();
+        LinkedList<Vertice> lista = new LinkedList<>();
         inicializa(grafo, vertice);
         lista = addVertices(grafo);
         Collections.sort(lista);
         while(!lista.isEmpty()){
+            Collections.sort(lista);
             Vertice verticeAtual;
-            verticeAtual = lista.remove(0);
+            verticeAtual = lista.removeFirst();
             for (Vertice adjacente : verticeAtual.getAdjacentes()) {
                 relaxar(verticeAtual, adjacente, verticeAtual.getCusto(adjacente) );
             } 
@@ -48,6 +48,16 @@ public class AlgoritmoDijkstra implements Algoritmo {
         }
         return fila;
     }
+
+    /* public static LinkedList<Vertice> addVertices(Grafo grafo, Vertice vertice) {
+        LinkedList<Vertice> list = new LinkedList<>();
+        list.add(vertice);
+        for (Vertice currentVertice : vertice.getAdjacentes()) {
+            if(!list.contains(currentVertice)) {
+                list.add(currentVertice);
+            }
+        }
+    } */
 
 
 }

@@ -1,7 +1,7 @@
 package Grafo;
 import java.util.LinkedList;
 
-public class Vertice implements Comparable {
+public class Vertice implements Comparable<Vertice> {
 
     private String id;
 
@@ -122,8 +122,7 @@ public class Vertice implements Comparable {
     }
 
     @Override
-    public int compareTo(Object object) {
-        Vertice otherVertice = (Vertice) object;
+    public int compareTo(Vertice otherVertice) {
         if(this.getCustoLocal() > otherVertice.getCustoLocal()) {
             return 1;
         } else if(this.getCustoLocal() < otherVertice.getCustoLocal()) {
