@@ -28,8 +28,10 @@ public class AlgoritmoDijkstra implements Algoritmo {
         for (Vertice proximoVertice : grafo.getVertices()) {
             proximoVertice.setCustoLocal(Double.POSITIVE_INFINITY);
             proximoVertice.setAnterior(null);
+            proximoVertice.setCustoAresta(Double.POSITIVE_INFINITY);
         }
         verticeAtual.setCustoLocal(0);
+        verticeAtual.setCustoAresta(0);
     }
 
     public static void relaxar(Vertice verticeA, Vertice verticeB, double peso) {
