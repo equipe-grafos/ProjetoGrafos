@@ -24,9 +24,14 @@ public class Main {
         String[] arquivoVertices = lerArquivo("vertices.txt");
         String[] arquivoArestas = lerArquivo("arestas.txt");
         LinkedList<Vertice> vertices = criarVertices(arquivoVertices);
+
+        String[] cores = {"azul", "vermelho", "verde", "roza", "amarelo", "preto", "cinza", "branco"};
+
         grafo.setListaVertices(vertices);
         criarArestasAddGrafo(grafo, arquivoArestas);
-       
+        
+        coloreGrafo(grafo, cores);
+
         menuPrincipal();
         opcao = ler.nextInt();
 
@@ -94,9 +99,9 @@ public class Main {
         System.out.format("%n %n=================================== %n");
         System.out.format("%n Grafo Unicap %n %n %n");
         for (Vertice verticeAtual : grafo.getVertices()) {
-            System.out.format(" [%s]", verticeAtual);
+            System.out.format(" [%s : %s]", verticeAtual, verticeAtual.getCorDoVertice());
             for (Vertice adjacente : verticeAtual.getAdjacentes()) {
-                System.out.format("%n --------> [%s : %.2f] %n", adjacente, verticeAtual.getCusto(adjacente));
+                System.out.format("%n -----------------> [%s : %.2f : %s] %n", adjacente, verticeAtual.getCusto(adjacente), adjacente.getCorDoVertice());
             }
             System.out.format("%n %n %n");
         }
@@ -165,5 +170,41 @@ public class Main {
             verticeAAtual.addAresta(novAresta);
         }
     }
+
+
+    public static void coloreGrafo(Grafo grafo, String[] cores) {
+        inicializaCores(grafo, cores);
+        for (int i = 1; i < grafo.getVertices().size(); i++) {
+            Vertice vertice = grafo.getVertices().get(i);
+            pintaVertice(vertice, cores);
+        }
+
+    }
+
+    public static void pintaVertice(Vertice vertice, String[] cores) {
+        for (int k = 0; k < cores.length; k++) {
+            if(podeEssaCor(vertice, cores[k])) {
+                vertice.setCorDoVertice(cores[k]);
+                return;
+            }
+        }
+    }
+
+    public static boolean podeEssaCor(Vertice vertice, String cor) {
+        for (Vertice adjacente : vertice.getAdjacentes()) {
+            if(adjacente.getCorDoVertice().equals(cor)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void inicializaCores(Grafo grafo, String[] cores) {
+        for (Vertice vertice : grafo.getVertices()) {
+            vertice.setCorDoVertice("");
+        }
+        grafo.getVertices().get(0).setCorDoVertice(cores[0]);
+    }
+
     
 }

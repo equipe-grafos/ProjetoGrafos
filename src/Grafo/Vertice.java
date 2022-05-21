@@ -10,6 +10,7 @@ public class Vertice implements Comparable<Vertice> {
     private Vertice anterior;
     private double custoLocal;
     private double custoAresta;
+    private String corDoVertice;
     private LinkedList<Aresta> arestas;
     private LinkedList<String> locais;
 
@@ -78,6 +79,14 @@ public class Vertice implements Comparable<Vertice> {
 
     public void setCustoLocal(double custoLocal) {
         this.custoLocal = custoLocal;
+    }
+
+    public String getCorDoVertice() {
+        return this.corDoVertice;
+    }
+
+    public void setCorDoVertice(String corDoVertice) {
+        this.corDoVertice = corDoVertice;
     }
 
     public LinkedList<String> getLocais() {
