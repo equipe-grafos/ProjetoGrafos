@@ -1,4 +1,4 @@
-package Algoritmos;
+package Algoritmos.Busca;
 import java.util.LinkedList;
 import java.util.Queue;
 

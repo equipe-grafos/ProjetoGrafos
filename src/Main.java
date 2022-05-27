@@ -5,13 +5,13 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import Algoritmos.Algoritmo;
-import Algoritmos.AlgoritmoBFS;
-import Algoritmos.AlgoritmoDijkstra;
+import Algoritmos.Busca.Algoritmo;
+import Algoritmos.Busca.AlgoritmoBFS;
+import Algoritmos.Busca.AlgoritmoDijkstra;
+import Algoritmos.Colorir.Colore;
 import Grafo.Aresta;
 import Grafo.Grafo;
 import Grafo.Vertice;
-
 
 public class Main {
 
@@ -24,13 +24,15 @@ public class Main {
         String[] arquivoVertices = lerArquivo("vertices.txt");
         String[] arquivoArestas = lerArquivo("arestas.txt");
         LinkedList<Vertice> vertices = criarVertices(arquivoVertices);
+        Colore colore;
 
         String[] cores = {"azul", "vermelho", "verde", "roza", "amarelo", "preto", "cinza", "branco"};
 
         grafo.setListaVertices(vertices);
         criarArestasAddGrafo(grafo, arquivoArestas);
-        
-        coloreGrafo(grafo, cores);
+
+        colore = new Colore(grafo, cores);
+        colore.coloreGrafo();
 
         menuPrincipal();
         opcao = ler.nextInt();
@@ -170,41 +172,5 @@ public class Main {
             verticeAAtual.addAresta(novAresta);
         }
     }
-
-
-    public static void coloreGrafo(Grafo grafo, String[] cores) {
-        inicializaCores(grafo, cores);
-        for (int i = 1; i < grafo.getVertices().size(); i++) {
-            Vertice vertice = grafo.getVertices().get(i);
-            pintaVertice(vertice, cores);
-        }
-
-    }
-
-    public static void pintaVertice(Vertice vertice, String[] cores) {
-        for (int k = 0; k < cores.length; k++) {
-            if(podeEssaCor(vertice, cores[k])) {
-                vertice.setCorDoVertice(cores[k]);
-                return;
-            }
-        }
-    }
-
-    public static boolean podeEssaCor(Vertice vertice, String cor) {
-        for (Vertice adjacente : vertice.getAdjacentes()) {
-            if(adjacente.getCorDoVertice().equals(cor)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static void inicializaCores(Grafo grafo, String[] cores) {
-        for (Vertice vertice : grafo.getVertices()) {
-            vertice.setCorDoVertice("");
-        }
-        grafo.getVertices().get(0).setCorDoVertice(cores[0]);
-    }
-
     
 }

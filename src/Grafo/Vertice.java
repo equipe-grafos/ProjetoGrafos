@@ -105,7 +105,6 @@ public class Vertice implements Comparable<Vertice> {
         this.arestas.add(aresta);
     }
     
-
     public LinkedList<Vertice> getAdjacentes() {
         LinkedList<Vertice> adjacentes = new LinkedList<>();
         if (!arestas.isEmpty()) {
@@ -140,6 +139,5 @@ public class Vertice implements Comparable<Vertice> {
             return 0;
         }
     }
-
 
 }

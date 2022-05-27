@@ -1,4 +1,4 @@
-package Algoritmos;
+package Algoritmos.Busca;
 
 import Grafo.Grafo;
 import Grafo.Vertice;
